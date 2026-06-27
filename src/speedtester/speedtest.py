@@ -4,10 +4,12 @@ import json
 import time
 import statistics
 import logging
+import urllib3
 from dataclasses import dataclass
 from typing import List, Optional
 
 import requests
+
 
 MAX_RETRIES = 2
 RETRY_BACKOFF = 0.3
@@ -16,6 +18,8 @@ DEFAULT_COUNT = 10
 DEFAULT_TIMEOUT = 5.0
 BYTES_IN_MIB = 1024 * 1024
 
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 logger = logging.getLogger("speedtester")
 
@@ -128,7 +132,7 @@ def calculate_speed(results: List[DownloadResult]) -> SpeedStats:
 
     if len(durations) >= 2:
         p50 = statistics.median(durations)
-        p95 = sorted(durations)[int(len(durations) * 0.95) - 1]
+        p95 = statistics.quantiles(durations, n=100)[94]
 
     return SpeedStats(
         avg_response_time=statistics.mean(durations),

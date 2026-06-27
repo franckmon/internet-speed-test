@@ -45,7 +45,7 @@ CLI-утилита на Python для измерения скорости заг
 
 ```bash
 uv sync
-uv run python speedtest.py https://example.com/file.jpg
+uv run python -m src.speedtester.speedtest https://example.com/file.jpg
 ```
 
 ## Через venv + pip
@@ -56,7 +56,7 @@ source .venv/bin/activate  # Windows: .venv\Scripts\activate
 
 pip install -r requirements.txt
 
-python speedtest.py https://example.com/file.jpg --count 10 --timeout 3
+python -m src.speedtester.speedtest https://example.com/file.jpg --count 10 --timeout 3
 ```
 
 ## Пример вывода
