@@ -138,6 +138,26 @@ pytest
 pytest --cov=speedtester
 ```
 
+## Разработка
+
+Установка зависимостей:
+
+```bash
+uv sync --dev
+```
+
+Установка Git хуков:
+
+```bash
+pre-commit install
+```
+
+Запуск форматирования и проверки на ошибки:
+
+```bash
+pre-commit run --all-files
+```
+
 ## Лицензия
 
 MIT
